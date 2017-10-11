@@ -14,21 +14,20 @@
     <i>Original von Uwe Witzel</i><br><br>
     Jodbedarf eines Hundes: 23,6 Mikrogramm/kg KM<sup>0,75</sup><br><br>
     <strong>Gewicht des Hundes (in kg):</strong><br>
-    <input type="number" id="kg"><br>
+    <input type="number" id="kg"><br><i style="color:#666">bei Junghunden/Welpen das geschätzte Endgewicht angeben</i><br><br>
     <strong>Jod pro Kilo Mehl (in mg):</strong><br>
-    <input type="number" id="mgjk"></input> <br>
+    <input type="number" id="mgjk"></input> <br><i style="color:#666">der Wert befindet sich meistens auf der Verpackung/Dose</i> <br><br>
     <input type="button" value="Berechnen" id="calc"><br><br>
     <div id="c" style="display:none;">
-    <span id="mgtag"></span> Mikrogramm pro Tag<br>
-    <span id="gtag"></span> Gramm pro Tag<br>
-    <span id="gw"></span> Gramm pro Woche<br>
+     pro Tag: <span id="mgtag"></span>&micro;g = <span id="gtag"></span>g<br>
+     pro Woche: <span id="gw"></span>g<br>
 <br>
     <strong>Jodgehalt von Seealgenmehl:</strong><br>
-    <span id="gjk"></span> Gramm Jod pro Kilo Mehl<br>
-    <span id="gjg"></span> Gramm Jod pro Gramm Mehl<br>
+    Jod pro Kilo Mehl: <span id="gjk"></span>g<br>
+    Jod pro Gramm Mehl: <span id="gjg"></span>g <br>
 <br>
-    <strong>Wochenbedarf in Gramm:</strong><br>
-    <span id="wb"></span>
+    <strong style="color:#c00">Wochenbedarf:</strong>
+    <span id="wb"></span>g
     </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -45,12 +44,12 @@
             var gw = gtag * 7;
             var gjk =mg_jod * 0.001;
             var gjg = gjk/1000;
-            $("#mgtag").html(mgtag);
-            $("#gtag").html(gtag);
-            $("#gw").html(gw);
-            $("#gjk").html(gjk);
-            $("#gjg").html(gjg);
-            $("#wb").html(gw/gjg);
+            $("#mgtag").html(mgtag.toFixed(7));
+            $("#gtag").html(gtag.toFixed(7));
+            $("#gw").html(gw.toFixed(9));
+            $("#gjk").html(gjk.toFixed(3));
+            $("#gjg").html(gjg.toFixed(6));
+            $("#wb").html((gw/gjg).toFixed(2));
             $("#c").show();
         })
     })

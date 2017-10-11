@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Seealgenmehl-Rechner für den Hund</title>
+</head>
+
+<body>
+    <h1>Seealgenmehl-Rechner für den Hund</h1>
+    Jodbedarf eines Hundes: 23,6 Mikrogramm/kg KM<sup>0,75</sup><br><br>
+    <strong>Gewicht des Hundes (in kg):</strong><br>
+    <input type="number" id="kg"><br>
+    <strong>Jod pro Kilo Mehl (in mg):</strong><br>
+    <input type="number" id="mgjk"></input> <br>
+    <input type="button" value="Berechnen" id="calc"><br><br>
+    <div id="c" style="display:none;">
+    <span id="mgtag"></span> Mikrogramm pro Tag<br>
+    <span id="gtag"></span> Gramm pro Tag<br>
+    <span id="gw"></span> Gramm pro Woche<br>
+<br>
+    <strong>Jodgehalt von Seealgenmehl:</strong><br>
+    <span id="gjk"></span> Gramm Jod pro Kilo Mehl<br>
+    <span id="gjg"></span> Gramm Jod pro Gramm Mehl<br>
+<br>
+    <strong>Wochenbedarf in Gramm:</strong><br>
+    <span id="wb"></span>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        $("#calc").on("click", function(){
+            var gewicht = $("#kg").val();
+            var mg_jod = $("#mgjk").val();
+            var f6 =gewicht * gewicht*gewicht;
+            var g6 =Math.sqrt(f6);
+            var h6 =Math.sqrt(g6);
+            var mgtag = h6 * 23.6;
+            var gtag = mgtag * 0.000001;
+            var gw = gtag * 7;
+            var gjk =mg_jod * 0.001;
+            var gjg = gjk/1000;
+            $("#mgtag").html(mgtag);
+            $("#gtag").html(gtag);
+            $("#gw").html(gw);
+            $("#gjk").html(gjk);
+            $("#gjg").html(gjg);
+            $("#wb").html(gw/gjg);
+            $("#c").show();
+        })
+    })
+  </script>
+</body>
+
+</html>

@@ -6,15 +6,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Seealgenmehl-Rechner für den Hund</title>
+  <title>Seealgenmehl-Rechner für den Hunde und Katzen</title>
 </head>
 
 <body>
-    <h1>Seealgenmehl-Rechner für den Hund</h1>
-    <i style="color:#666">Original von Uwe Witzel (Excel-Sheet), Online-Version von Paul Pröll</i><br><br>
-    Jodbedarf eines Hundes: 23,6 Mikrogramm/kg KM<sup>0,75</sup><br><br>
-    <strong>Gewicht des Hundes (in kg):</strong><br>
-    <input type="number" id="kg"><br><i style="color:#666">bei Junghunden/Welpen das geschätzte Endgewicht angeben</i><br><br>
+    <h1>Seealgenmehl-Rechner für den Hunde und Katzen</h1>
+    <i style="color:#666">Original von Uwe Witzel (Excel-Sheet), erweiterte Online-Version von Paul Pröll</i><br><br>
+    <strong>Jodbedarf:</strong><br>
+    <input type="radio" name="tier" value="hund" checked /> Hund: 23,6&micro;g/kg KM<br>
+    <input type="radio" name="tier" value="katze" /> Katze: 60&micro;g/kg KM<br>
+    <input type="radio" name="tier" value="eigener" /> eigener Wert: <input type="number" id="jod" style="width:50px"> &micro;g/kg KM<br><br>
+    <strong>Gewicht des Tiers (in kg):</strong><br>
+    <input type="number" id="kg"><br><i style="color:#666">bei jungen Tieren das geschätzte Endgewicht angeben</i><br><br>
     <strong>Jod pro Kilo Mehl (in mg):</strong><br>
     <input type="number" id="mgjk"></input> <br><i style="color:#666">der Wert befindet sich meistens auf der Verpackung/Dose</i> <br><br>
     <input type="button" value="Berechnen" id="calc"><br><br>
@@ -39,7 +42,14 @@
             var f6 =gewicht * gewicht*gewicht;
             var g6 =Math.sqrt(f6);
             var h6 =Math.sqrt(g6);
-            var mgtag = h6 * 23.6;
+
+            var tier = $("input[name=tier]:checked").val();
+            var jod = 0;
+            if(tier == "hund") jod = 23.6;
+            if(tier == "katze") jod = 60;
+            if(tier == "eigener") jod = $("#jod").val();
+
+            var mgtag = h6 * jod;
             var gtag = mgtag * 0.000001;
             var gw = gtag * 7;
             var gjk =mg_jod * 0.001;
